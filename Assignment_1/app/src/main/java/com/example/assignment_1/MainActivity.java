@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button next_Activity;
     Spinner spinner;
     EditText Name,Address,Phone,Message;
-    double TotalCost = 0;
+    double ExtraCost,SizeCost,ToppingCost = 0;
 
     ProgressBar progressBar;
 
@@ -68,20 +68,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch(i){
                     case R.id.radioButton1:
-                        TotalCost = 0;
-                        TotalCost += 5.5;
+                        SizeCost = 0;
+                        SizeCost = 5.5;
                         break;
                     case R.id.radioButton2:
-                        TotalCost = 0;
-                        TotalCost += 7.99;
+                        SizeCost = 0;
+                        SizeCost = 7.99;
                         break;
                     case R.id.radioButton3:
-                        TotalCost = 0;
-                        TotalCost += 9.5;
+                        SizeCost = 0;
+                        SizeCost = 9.5;
                         break;
                     case R.id.radioButton4:
-                        TotalCost = 0;
-                        TotalCost += 11.38;
+                        SizeCost = 0;
+                        SizeCost = 11.38;
                         break;
                     default:
                         break;
@@ -94,9 +94,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    TotalCost += 5;
+                    ExtraCost += 5;
                 }else{
-                    TotalCost -= 5;
+                    ExtraCost -= 5;
                 }
             }
         });
@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    TotalCost += 5;
+                    ExtraCost += 5;
                 }else{
-                    TotalCost -= 5;
+                    ExtraCost -= 5;
                 }
             }
         });
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String AddressField = Address.getText().toString();
                 String PhoneField = Phone.getText().toString();
                 String MessageField = Message.getText().toString();
-                String CostField = Double.toString(TotalCost);
+                String CostField = Double.toString(ExtraCost + SizeCost + ToppingCost);
 
                 Intent intent = new Intent(MainActivity.this,MainActivity2.class);
                 intent.putExtra("keyName",NameField);
@@ -147,13 +147,53 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String toppingSelected = spinner.getItemAtPosition(position).toString();
+        switch(position){
+            case 0:
+                ToppingCost = 0;
+                ToppingCost = 5;
+                break;
+            case 1:
+                ToppingCost = 0;
+                ToppingCost = 5;
+                break;
+            case 2:
+                ToppingCost = 0;
+                ToppingCost = 7;
+                break;
+            case 3:
+                ToppingCost = 0;
+                ToppingCost = 8;
+                break;
+            case 4:
+                ToppingCost = 0;
+                ToppingCost = 10;
+                break;
+            case 5:
+                ToppingCost = 0;
+                ToppingCost = 5;
+                break;
+            case 6:
+                ToppingCost = 0;
+                ToppingCost = 9;
+                break;
+            case 7:
+                ToppingCost = 0;
+                ToppingCost = 5;
+                break;
+            case 8:
+                ToppingCost = 0;
+                ToppingCost = 5;
+                break;
+            case 9:
+                ToppingCost = 0;
+                ToppingCost = 8;
+                break;
+            default:
+                break;
+        }
+
         Toast.makeText(MainActivity.this,"you selected:" + toppingSelected,Toast.LENGTH_LONG).show();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        switch(position) {
-            case position == 1:
 
-
-        }
-        }
 
     }
 
