@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        //Checkbox for extra cheese
         check1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        //checkbox for delivery
         check2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -146,6 +148,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String toppingSelected = spinner.getItemAtPosition(position).toString();
         Toast.makeText(MainActivity.this,"you selected:" + toppingSelected,Toast.LENGTH_LONG).show();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        switch(position) {
+            case position == 1:
+
+
+        }
+        }
+
     }
 
     @Override
