@@ -13,13 +13,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     //Initiate global input variables
+    String Topping, Size;
     RadioGroup groupSize;
     CheckBox check1, check2;
     Button next_Activity;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     double ExtraCost,SizeCost,ToppingCost = 0;
 
     ProgressBar progressBar;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     default:
                         break;
                 }
+
             }
         });
 
@@ -117,18 +123,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         next_Activity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
+
                 String NameField = Name.getText().toString();
                 String AddressField = Address.getText().toString();
                 String PhoneField = Phone.getText().toString();
                 String MessageField = Message.getText().toString();
-                String CostField = Double.toString(ExtraCost + SizeCost + ToppingCost);
+                String CostField = df.format(ExtraCost + SizeCost + ToppingCost);
 
                 Intent intent = new Intent(MainActivity.this,MainActivity2.class);
+                intent.putExtra("keyTopping",Topping);
                 intent.putExtra("keyName",NameField);
                 intent.putExtra("keyAddress",AddressField);
                 intent.putExtra("keyPhone",PhoneField);
                 intent.putExtra("keyMessage",MessageField);
                 intent.putExtra("keyTotalPrice",CostField);
+
+                //If user does not choose a pizza size or fill in contact details, refresh the activity
+                if(NameField.equals("")||AddressField.equals("")||PhoneField.equals("")||SizeCost==0){
+                    intent = new Intent(MainActivity.this,MainActivity.class);
+                    Toast.makeText(MainActivity.this,"Missing Entries, try again!",Toast.LENGTH_LONG).show();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                }
 
                 startActivity(intent);
             }
@@ -149,10 +163,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String toppingSelected = spinner.getItemAtPosition(position).toString();
         switch(position){
             case 0:
-                ToppingCost = 0;
-                ToppingCost = 5;
-                break;
             case 1:
+            case 5:
+            case 7:
+            case 8:
                 ToppingCost = 0;
                 ToppingCost = 5;
                 break;
@@ -161,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ToppingCost = 7;
                 break;
             case 3:
+            case 9:
                 ToppingCost = 0;
                 ToppingCost = 8;
                 break;
@@ -168,32 +183,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ToppingCost = 0;
                 ToppingCost = 10;
                 break;
-            case 5:
-                ToppingCost = 0;
-                ToppingCost = 5;
-                break;
             case 6:
                 ToppingCost = 0;
                 ToppingCost = 9;
-                break;
-            case 7:
-                ToppingCost = 0;
-                ToppingCost = 5;
-                break;
-            case 8:
-                ToppingCost = 0;
-                ToppingCost = 5;
-                break;
-            case 9:
-                ToppingCost = 0;
-                ToppingCost = 8;
                 break;
             default:
                 break;
         }
 
-        Toast.makeText(MainActivity.this,"you selected:" + toppingSelected,Toast.LENGTH_LONG).show();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        Topping = toppingSelected;
 
     }
 

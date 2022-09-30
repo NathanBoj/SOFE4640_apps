@@ -14,7 +14,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     //Initiate global input variables
     Button previous_Activity;
-    TextView Name,Address,Phone,Message,Price;
+    TextView Topping,Name,Address,Phone,Message,Price;
     ProgressBar bar;
 
     @Override
@@ -37,18 +37,21 @@ public class MainActivity2 extends AppCompatActivity {
         bar.setVisibility(View.VISIBLE);
         thread.start();
 
+        String ToppingField = getIntent().getStringExtra("keyTopping");
         String NameField = getIntent().getStringExtra("keyName");
         String AddressField = getIntent().getStringExtra("keyAddress");
         String PhoneField = getIntent().getStringExtra("keyPhone");
         String MessageField = getIntent().getStringExtra("keyMessage");
         String PriceField = getIntent().getStringExtra("keyTotalPrice");
 
+        Topping = findViewById(R.id.Topping2);
         Name = findViewById(R.id.textName2);
         Address = findViewById(R.id.textAddress2);
         Phone = findViewById(R.id.textPhone2);
         Message = findViewById(R.id.textMessage2);
         Price = findViewById(R.id.textPrice2);
 
+        Topping.setText(ToppingField);
         Name.setText(NameField);
         Address.setText(AddressField);
         Phone.setText(PhoneField);
