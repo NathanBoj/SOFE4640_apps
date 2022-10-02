@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     EditText Name,Address,Phone,Message;
     double ExtraCost,SizeCost,ToppingCost = 0;
 
+    //Progress bar just for fun
     ProgressBar progressBar;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         progressBar = findViewById(R.id.progressBar);
 
+        //Progress bar
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         progressBar.setVisibility(View.VISIBLE);
         thread.start();
 
-
         //Define variables to palette button id's
         check1 = findViewById(R.id.checkBox1);
         check2 = findViewById(R.id.checkBox2);
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Phone = findViewById(R.id.textPhone1);
         Message = findViewById(R.id.textMessage1);
         groupSize = findViewById(R.id.radioGroup);
-
 
         //See which size user has chosen
         groupSize.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     default:
                         break;
                 }
-
             }
         });
 
@@ -124,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View V){
 
+                //Convert user input to display on next activity, we use key values to transfer data
                 String NameField = Name.getText().toString();
                 String AddressField = Address.getText().toString();
                 String PhoneField = Phone.getText().toString();
@@ -143,21 +143,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     intent = new Intent(MainActivity.this,MainActivity.class);
                     Toast.makeText(MainActivity.this,"Missing Entries, try again!",Toast.LENGTH_LONG).show();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 }
-
                 startActivity(intent);
             }
         });
 
-        //Create array to hold toppings
+        //Create array to hold toppings from spinner
         ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.toppings_list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
     }
 
-    //for dropdown...
+    //Spinner topping costs
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String toppingSelected = spinner.getItemAtPosition(position).toString();
@@ -190,15 +188,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             default:
                 break;
         }
-
         Topping = toppingSelected;
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
-
-
 }

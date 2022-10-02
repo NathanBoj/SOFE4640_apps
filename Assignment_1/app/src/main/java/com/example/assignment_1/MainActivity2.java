@@ -22,6 +22,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        //Progress bar just for fun
         bar = findViewById(R.id.progressBar2);
 
         Thread thread = new Thread(new Runnable() {
@@ -37,6 +38,7 @@ public class MainActivity2 extends AppCompatActivity {
         bar.setVisibility(View.VISIBLE);
         thread.start();
 
+        //Here we get the values the user inputted in the first activity using key values
         String ToppingField = getIntent().getStringExtra("keyTopping");
         String NameField = getIntent().getStringExtra("keyName");
         String AddressField = getIntent().getStringExtra("keyAddress");
@@ -51,6 +53,7 @@ public class MainActivity2 extends AppCompatActivity {
         Message = findViewById(R.id.textMessage2);
         Price = findViewById(R.id.textPrice2);
 
+        //Just set the text to the users information in the first activity
         Topping.setText(ToppingField);
         Name.setText(NameField);
         Address.setText(AddressField);
@@ -60,11 +63,11 @@ public class MainActivity2 extends AppCompatActivity {
 
         previous_Activity = (Button) findViewById(R.id.button2);
 
+        //Button that goes back to the first activity
         previous_Activity.setOnClickListener(new View.OnClickListener(){
             @Override
                     public void onClick(View V) {
                 Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-
                 startActivity(intent);
             }
         });
